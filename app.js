@@ -10,7 +10,7 @@ let flights = [
     },
     {
         time: "10:54",
-        destination:"LOS ANGELES",
+        destination:"ATLANTA",
         flight: "LW 409",
         gate: "B 04",
         remarks: "ON TIME"
@@ -38,14 +38,31 @@ let flights = [
     }
 ]
 
+const destination = ["PARIS", "ATLANTA", "DAKAR", "LILLE", "FRANKFURT"]
+const remarks = ["ON TIME", "CANCELLED", "DELAYED"]
+let hour = 15
+
+
+
 function populateTable() {
     for (const flight of flights){
         const tableRow = document.createElement("tr")
-
         for(const flightDetail in flight) {
             const  tableCell = document.createElement("td")
-            console.log('flightDetail', flightDetail)
-            tableCell.innerText = flight[flightDetail]
+            const word = Array.from(flight[flightDetail])
+
+            for (const [index,letter] of word.entries()) {
+                const letterElement = document.createElement('div')
+
+                setTimeout(() => {
+                    letterElement.classList.add('flip')
+                    letterElement.textContent = letter
+                    tableCell.append(letterElement)
+                }, 100 * index)
+
+            }
+
+
             tableRow.append(tableCell)
         }
         tableBody.append(tableRow)
